@@ -31,6 +31,10 @@ app.use('/health', healthRouter);
 app.use('/logs', logRouter);
 app.use('/feedback', feedbackRouter);
 
+app.get('/', (req, res) => {
+  res.render('index'); // Ensure you have an index.ejs file in your views folder
+});
+
 app.listen(port, () => {
   console.log(`Nudge app running at http://localhost:${port}`);
 });

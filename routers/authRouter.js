@@ -28,7 +28,16 @@ router.get('/login', (req, res) => {
 // Handle login
 router.post('/login', authController.login);
 
+// Show dashboard (protected route)
+router.get('/dashboard', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login'); // Redirect to login if not logged in
+  }
+  res.render('dashboard', { user: req.session.user }); // Pass user data to dashboard view
+});
+
 // Logout
 router.get('/logout', authController.logout);
 
 module.exports = router;
+
