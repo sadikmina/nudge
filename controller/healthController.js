@@ -16,7 +16,6 @@ exports.showCalculators = (req, res) => {
     const caloricNeeds = calculateCaloricNeeds(user.weight, user.height, user.age, user.gender, 'moderate');
     const bodyFat = calculateBodyFat(user.gender, user.height, user.neck_circumference, user.belly_circumference);
 
-    // Render the results
     res.render('calculators', {
       bmi,
       bmiCategory: category,

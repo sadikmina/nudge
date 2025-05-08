@@ -30,7 +30,6 @@ exports.updateProfile = (req, res) => {
       return res.status(500).send('Database error');
     }
 
-    // Update session values
     req.session.user.weight = weight;
     req.session.user.goal_weight = goal_weight;
 
@@ -47,7 +46,6 @@ exports.deleteProfile = (req, res) => {
       return res.status(500).send('Error deleting profile');
     }
 
-    // Destroy session and redirect to login
     req.session.destroy((err) => {
       if (err) {
         console.error('Error destroying session:', err);

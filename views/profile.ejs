@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile</title>
+  <link rel="stylesheet" href="/css/styles.css">
+
 </head>
 <body>
+  <%- include('partials/navbar') %>
+
   <h1>Your Profile</h1>
   <form action="/profile" method="POST">
     <label>Age: <input type="number" name="age" value="<%= profile.age %>" required></label><br>

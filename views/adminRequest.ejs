@@ -1,3 +1,11 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+<body>
+<%- include('partials/navbar') %>
+
 <h1>Admin Panel – User Requests</h1>
 
 <% if (requests.length === 0) { %>
@@ -18,3 +26,6 @@
     </div>
   <% }) %>
 <% } %>
+  
+</body>
+</html>
