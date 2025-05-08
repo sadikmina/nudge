@@ -1,13 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-
-
-// router.get('/', (req, res) => {
-//   res.send('Auth router working!');
-// });
-
-// module.exports = router;
-
 const express = require('express');
 const router = express.Router();
 const authController = require('../controller/authController');
@@ -37,7 +27,16 @@ router.get('/dashboard', (req, res) => {
 });
 
 // Logout
-router.get('/logout', authController.logout);
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send('Failed to destroy session');
+    }
+    res.redirect('/'); 
+  });
+});
+
 
 module.exports = router;
+
 

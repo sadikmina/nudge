@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Health Stats</title>
+</head>
+<body>
+  <h1>Your Health Calculations</h1>
+
+  <!-- Display BMI information, ensuring defaults if not available -->
+  <% if (bmi && bmiCategory) { %>
+    <p><strong>BMI:</strong> <%= bmi %> (<%= bmiCategory %>)</p>
+  <% } else { %>
+    <p><strong>BMI:</strong> Not calculated yet.</p>
+  <% } %>
+
+  <!-- Display Caloric Needs, ensuring defaults if not available -->
+  <% if (caloricNeeds) { %>
+    <p><strong>Estimated Daily Caloric Needs:</strong> <%= caloricNeeds %> kcal</p>
+  <% } else { %>
+    <p><strong>Estimated Daily Caloric Needs:</strong> Not calculated yet.</p>
+  <% } %>
+
+  <!-- Display Body Fat Percentage, ensuring defaults if not available -->
+  <% if (bodyFat) { %>
+    <p><strong>Body Fat Percentage:</strong> <%= bodyFat %>%</p>
+  <% } else { %>
+    <p><strong>Body Fat Percentage:</strong> Not calculated yet.</p>
+  <% } %>
+
+</body>
+</html>

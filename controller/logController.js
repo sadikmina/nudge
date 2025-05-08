@@ -2,7 +2,7 @@ const logModel = require('../model/logModel');
 
 const addLog = (req, res) => {
   const userId = req.session.user.id;
-  const { type, description } = req.body; // type = 'meal' or 'exercise'
+  const { type, description } = req.body;
   logModel.addLog(userId, type, description, (err) => {
     if (err) return res.send('Failed to log');
     res.redirect('/logs');

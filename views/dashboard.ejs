@@ -1,3 +1,4 @@
+<!-- views/dashboard.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,38 @@
 <body>
   <h1>Welcome, <%= user.name %>!</h1>
   <p>This is your dashboard.</p>
-  <!-- Add more content for the dashboard here -->
+
+  <% if (user.weight && user.goal_weight) { %>
+    <p><strong><%= Math.abs(user.weight - user.goal_weight) %> kg to go</strong></p>
+  <% } else { %>
+    <p><em>Update your profile to set weight and goal!</em></p>
+  <% } %>
+
+  <a href="/profile">Profile</a>
+  <a href="/health/calculators">Health Calculators</a>
   <a href="/logout">Logout</a>
+
+  <hr>
+
+  <h2>Request Suggestions</h2>
+  <% if (user.meal_plan_requested || user.exercise_suggestion_requested) { %>
+    <p>You have already requested a suggestion:</p>
+    <% if (user.meal_plan_requested) { %>
+      <p>- Meal Plan</p>
+    <% } %>
+    <% if (user.exercise_suggestion_requested) { %>
+      <p>- Exercise Suggestion</p>
+    <% } %>
+  <% } else { %>
+    <p>You haven't requested any suggestions yet. <a href="/request">Request Meal Plan or Exercise Suggestion</a></p>
+  <% } %>
+  <!-- Add this at the end of dashboard.ejs -->
+<hr>
+<h2>Send Feedback to Admin</h2>
+<form action="/feedback" method="POST">
+  <textarea name="message" rows="5" cols="40" placeholder="Your feedback..." required></textarea><br>
+  <button type="submit">Submit Feedback</button>
+</form>
+
 </body>
 </html>
