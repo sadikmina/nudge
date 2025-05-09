@@ -8,14 +8,18 @@
 
 </head>
 <body>
-  <%- include('partials/navbar') %>
+  <header>
+  <h1><a class="brand" href="/">nudge</a></h1>
+</header>
 
-  <h1>Admin Login</h1>
-  <form action="/admin/login" method="POST">
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form action="/admin/login" method="POST">
     <label for="password">Enter Admin Password:</label>
     <input type="password" name="password" required>
     <button type="submit">Login</button>
   </form>
-  <a href="/">Back to Home</a>
+  </div>
+
 </body>
 </html>

@@ -11,7 +11,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { password } = req.body;
-  const ADMIN_PASSWORD = 'mySecret123';
+  const ADMIN_PASSWORD = 'bolteparina';
   if (password === ADMIN_PASSWORD) {
     req.session.isAdmin = true;
     res.redirect('/admin');

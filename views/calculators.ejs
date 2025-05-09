@@ -1,35 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Health Stats</title>
   <link rel="stylesheet" href="/css/styles.css">
 
+  <style>
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      flex: 1 1 250px;
+      max-width: 300px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
+
   <%- include('partials/navbar') %>
 
-  <h1>Your Health Calculations</h1>
+  <div class="container">
+    <h1>Your Health Calculations</h1>
 
-  <!-- Display BMI information, ensuring defaults if not available -->
-  <% if (bmi && bmiCategory) { %>
-    <p><strong>BMI:</strong> <%= bmi %> (<%= bmiCategory %>)</p>
-  <% } else { %>
-    <p><strong>BMI:</strong> Not calculated yet.</p>
-  <% } %>
+    <div class="card-container">
+      <!-- BMI Card -->
+      <div class="card">
+        <h3 style="color: #d2360b;">BMI</h3>
 
-  <!-- Display Caloric Needs, ensuring defaults if not available -->
-  <% if (caloricNeeds) { %>
-    <p><strong>Estimated Daily Caloric Needs:</strong> <%= caloricNeeds %> kcal</p>
-  <% } else { %>
-    <p><strong>Estimated Daily Caloric Needs:</strong> Not calculated yet.</p>
-  <% } %>
+        <p>
+          <% if (bmi && bmiCategory) { %>
+            <strong><%= bmi %> (<%= bmiCategory %>)</strong>
+          <% } else { %>
+            Not calculated yet.
+          <% } %>
+        </p>
+      </div>
 
-  <!-- Display Body Fat Percentage, ensuring defaults if not available -->
-  <% if (bodyFat) { %>
-    <p><strong>Body Fat Percentage:</strong> <%= bodyFat %>%</p>
-  <% } else { %>
-    <p><strong>Body Fat Percentage:</strong> Not calculated yet.</p>
-  <% } %>
+      <!-- Caloric Needs Card -->
+      <div class="card">
+        <h3 style="color: #d2360b;">Daily Caloric Needs</h3>
+        <p>
+          <% if (caloricNeeds) { %>
+            <strong><%= caloricNeeds %> kcal</strong>
+          <% } else { %>
+            Not calculated yet.
+          <% } %>
+        </p>
+      </div>
+
+      <!-- Body Fat Percentage Card -->
+      <div class="card">
+        <h3 style="color: #d2360b;">Body Fat Percentage</h3>
+        <p>
+          <% if (bodyFat) { %>
+            <strong><%= bodyFat %>%</strong>
+          <% } else { %>
+            Not calculated yet.
+          <% } %>
+        </p>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

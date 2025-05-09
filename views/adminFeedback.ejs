@@ -1,27 +1,132 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="/css/styles.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel – Feedback</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .brand {
+      all: unset;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .brand:hover {
+      color: #780505;
+      text-decoration: none;
+    }
+
+    .feedback-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .feedback-card-modern {
+      background: #fff;
+      border-left: 5px solid #007BFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .feedback-card-modern:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .feedback-meta {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .feedback-message {
+      font-size: 1rem;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .delete-form-modern {
+      margin-top: 16px;
+    }
+
+    .delete-btn-modern {
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-btn-modern:hover {
+      background-color: #c0392b;
+    }
+
+    .no-feedback {
+      text-align: center;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
 <body>
-<%- include('partials/navbar') %>
-        
-<h1>Feedback From Users</h1>
+  <header>
+    <h1><a class="brand" href="/admin">⬅️ Admin Panel</a></h1>
+  </header>
 
-<% if (feedback.length === 0) { %>
-  <p>No feedback submitted yet.</p>
-<% } else { %>
-  <% feedback.forEach(entry => { %>
-    <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem; border-radius: 8px;">
-      <p><strong>Name:</strong> <%= entry.name %> (<%= entry.email %>)</p>
-      <p><strong>Submitted At:</strong> <%= entry.submitted_at.toLocaleString() %></p>
-      <p><strong>Message:</strong> <%= entry.message %></p>
+  <section class="container">
+    <h1>Feedback From Users</h1>
 
-      <form action="/admin/feedback/<%= entry.id %>/resolve" method="POST" onsubmit="return confirm('Delete this feedback?');">
-        <button type="submit">✅ Delete</button>
-      </form>
-    </div>
-  <% }) %>
-<% } %>
-
+    <% if (feedback.length === 0) { %>
+      <p class="no-feedback">No feedback submitted yet.</p>
+    <% } else { %>
+      <div class="feedback-list">
+        <% feedback.forEach(entry => { %>
+          <div class="feedback-card-modern">
+            <div class="feedback-meta">
+              <strong>Name:</strong> <%= entry.name %> (<%= entry.email %>)<br>
+              <strong>Submitted At:</strong> <%= entry.submitted_at.toLocaleString() %>
+            </div>
+            <div class="feedback-message">
+              <p><strong>Message:</strong> <%= entry.message %></p>
+            </div>
+            <form action="/admin/feedback/<%= entry.id %>/resolve" method="POST" class="delete-form-modern" onsubmit="return confirm('Delete this feedback?');">
+              <button type="submit" class="delete-btn-modern">❌ Delete</button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
 </body>
 </html>

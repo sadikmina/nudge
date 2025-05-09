@@ -1,31 +1,149 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel – User Requests</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
 
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .brand {
+      all: unset;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .brand:hover {
+      color: #780505;
+      text-decoration: none;
+    }
+
+    header {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .requests-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .request-card-modern {
+      background: #fff;
+      border-left: 5px solid #ba130d;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .request-card-modern:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .request-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .request-header h3 {
+      margin: 0;
+      color: #333;
+      font-size: 1.25rem;
+    }
+
+    .request-header .email {
+      font-size: 0.95rem;
+      color: #777;
+    }
+
+    .request-body p {
+      margin: 6px 0;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    .resolve-form-modern {
+      margin-top: 16px;
+    }
+
+    .resolve-btn-modern {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .resolve-btn-modern:hover {
+      background-color: #1e8449;
+    }
+
+    .no-requests {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-<%- include('partials/navbar') %>
+  <header>
+    <h1><a class="brand" href="/admin">⬅️ Admin Panel</a></h1>
+  </header>
 
-<h1>Admin Panel – User Requests</h1>
+  <div class="container">
+    <h1>Admin Panel – User Requests</h1>
 
-<% if (requests.length === 0) { %>
-  <p>No requests available at the moment.</p>
-<% } else { %>
-  <% requests.forEach(req => { %>
-    <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem; border-radius: 8px;">
-      <p><strong>Name:</strong> <%= req.name %></p>
-      <p><strong>Email:</strong> <%= req.email %></p>
-      <p><strong>Age:</strong> <%= req.age %> | <strong>Height:</strong> <%= req.height %> cm</p>
-      <p><strong>Weight:</strong> <%= req.weight %> kg | <strong>Goal Weight:</strong> <%= req.goal_weight %> kg</p>
-      <p><strong>Meal Plan Requested:</strong> <%= req.meal_plan_requested ? 'Yes' : 'No' %></p>
-      <p><strong>Exercise Suggestion Requested:</strong> <%= req.exercise_suggestion_requested ? 'Yes' : 'No' %></p>
-      
-      <form action="/admin/requests/<%= req.id %>/resolve" method="POST" onsubmit="return confirm('Mark this request as resolved?');">
-        <button type="submit">✅ Resolve</button>
-      </form>
-    </div>
-  <% }) %>
-<% } %>
-  
+    <% if (requests.length === 0) { %>
+      <p class="no-requests">No requests available at the moment.</p>
+    <% } else { %>
+      <div class="requests-list">
+        <% requests.forEach(req => { %>
+          <div class="request-card-modern">
+            <div class="request-header">
+              <h3><%= req.name %></h3>
+              <p class="email"><%= req.email %></p>
+            </div>
+
+            <div class="request-body">
+              <p><strong>Age:</strong> <%= req.age %> | <strong>Height:</strong> <%= req.height %> cm</p>
+              <p><strong>Weight:</strong> <%= req.weight %> kg | <strong>Goal:</strong> <%= req.goal_weight %> kg</p>
+              <p><strong>Meal Plan:</strong> <%= req.meal_plan_requested ? 'Yes' : 'No' %></p>
+              <p><strong>Exercise Suggestion:</strong> <%= req.exercise_suggestion_requested ? 'Yes' : 'No' %></p>
+            </div>
+
+            <form action="/admin/requests/<%= req.id %>/resolve" method="POST" class="resolve-form-modern" onsubmit="return confirm('Mark this request as resolved?');">
+              <button type="submit" class="resolve-btn-modern">✅ Resolve</button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
 </body>
 </html>

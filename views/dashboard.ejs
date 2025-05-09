@@ -7,37 +7,58 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+  <%- include('partials/navbar') %>
 
-<%- include('partials/navbar') %>
+  <main class="container">
+    <section class="card welcome-card">
+      <h1 class="greeting">Hello, <span class="username"><%= user.name %></span></h1>
+      <% if (user.weight && user.goal_weight) { %>
+  <div class="progress-card">
+    <p class="progress-text"> Just  
+      <span class="kg-highlight">
+        <%= Math.abs(user.weight - user.goal_weight) %>
+      </span>
+      <span class="kg-label">kg(s) to go!!</span>
+    </p>
+  </div>
+<% } else { %>
+  <p class="note">Set your weight and goal in your profile.</p>
+<% } %>
 
-<div class="container">
-  <h1>Welcome, <%= user.name %>!</h1>
-  <% if (user.weight && user.goal_weight) { %>
-    <p><strong><%= Math.abs(user.weight - user.goal_weight) %> kg to go</strong></p>
-  <% } else { %>
-    <p><em>Update your profile to set weight and goal!</em></p>
-  <% } %>
+    </section>
 
-  <h2>Request Suggestions</h2>
-  <% if (user.meal_plan_requested || user.exercise_suggestion_requested) { %>
-    <p>You have already requested a suggestion:</p>
-    <% if (user.meal_plan_requested) { %>
-      <p>- Meal Plan</p>
-    <% } %>
-    <% if (user.exercise_suggestion_requested) { %>
-      <p>- Exercise Suggestion</p>
-    <% } %>
-  <% } else { %>
-    <p>You haven't requested any suggestions yet. <a href="/request">Request Meal Plan or Exercise Suggestion</a></p>
-  <% } %>
+    <section class="card suggestions-card">
+      <h2>Suggestions</h2>
+      <% if (user.meal_plan_requested || user.exercise_suggestion_requested) { %>
+        <p>Your requests:</p>
+        <ul class="request-list">
+          <% if (user.meal_plan_requested) { %>
+            <li>Meal Plan</li>
+          <% } %>
+          <% if (user.exercise_suggestion_requested) { %>
+            <li>Exercise</li>
+          <% } %>
+        </ul>
+      <% } else { %>
+        <form action="/request" method="GET" class="request-form">
+          <button type="submit" class="btn-primary">Request Now</button>
+        </form>
+      <% } %>
+    </section>
 
-  <hr>
-  <h2>Send Feedback to Admin</h2>
-  <form action="/feedback" method="POST">
-    <textarea name="message" rows="5" cols="40" placeholder="Your feedback..." required></textarea><br>
-    <button type="submit">Submit Feedback</button>
-  </form>
-</div>
-
+    <section class="card feedback-card">
+      <h2>Feedback</h2>
+      <form action="/feedback" method="POST" class="feedback-form">
+        <input
+          type="text"
+          name="message"
+          placeholder="Share your thoughts..."
+          required
+          class="feedback-input"
+        >
+        <button type="submit" class="btn-secondary">Send</button>
+      </form>
+    </section>
+  </main>
 </body>
 </html>

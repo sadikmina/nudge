@@ -1,19 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <%- include('partials/navbar') %>
+  <header>
+  <h1><a class="brand" href="/">nudge</a></h1>
+</header>
 
 
-    <h1>Admin Dashboard</h1>
+  <section class="login-container">
+    <h2>Admin Dashboard</h2>
     <ul>
-      <li><a href="/admin/requests">View User Requests</a></li>
-      <li><a href="/admin/feedback">View Feedback</a></li>
+      <li><a href="/admin/requests" class="nav-btn">View Requests</a></li>
+      <li><a href="/admin/feedback" class="nav-btn">View Feedback</a></li>
     </ul>
-
+  </section>
 </body>
-
-
 </html>
-

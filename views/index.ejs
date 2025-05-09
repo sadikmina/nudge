@@ -5,29 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="stylesheet" href="/css/styles.css">
-
 </head>
 <body>
-<%- include('partials/navbar') %>
-
-<!-- <h1>Welcome to the Home Page</h1> -->
-
-<!-- <img src="/images/hero.jpg" alt="Fitness motivation image" style="width:100%; border-radius: 8px; height: 50%; margin-top:1rem;"> 
-  -->
-  <div style="width: 100%; height: 500px; overflow: hidden; margin-top: 1rem;">
-    <img src="/images/hero.jpg"
-         alt="Fitness motivation image"
-         style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
-  </div>
-  
-  
-  
+  <header>
+  <h1><a class="brand">nudge</a></h1>
+</header>
 
   <nav>
-    <a href="/login">Login</a> | 
-    <a href="/register">Register</a> | 
-    <a href="/admin/login">Admin Login</a>
+    <a href="/login" class="nav-btn">Login</a>
+    <a href="/register" class="nav-btn">Register</a>
+    <a href="/admin/login" class="nav-btn">Admin Login</a>
   </nav>
-  
 </body>
 </html>

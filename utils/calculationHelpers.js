@@ -1,5 +1,3 @@
-// === utils/calculationHelpers.js ===
-
 function calculateBMI(weight, height) {
     const heightMeters = height / 100;
     const bmi = weight / (heightMeters * heightMeters);
@@ -32,7 +30,6 @@ function calculateBMI(weight, height) {
     if (gender === 'male') {
       bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(belly - neck) + 0.15456 * Math.log10(height)) - 450;
     } else {
-      // Female formula (adjust belly as waist + hip if needed)
       bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(belly + neck) + 0.221 * Math.log10(height)) - 450;
     }
     return bodyFat.toFixed(2);
